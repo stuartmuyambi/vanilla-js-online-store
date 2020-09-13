@@ -20,13 +20,17 @@ class Products {
             // adding the path to the products page
             let result = await fetch('../products.json'); // added semi colon
             let data = await result.json();
+
+
             let products = data.items;
-            products = products.map(item =>{
-            	const {title,price} = item.fields;
-            	const {id} = item.sys;
-            	const image = item.fields.image.fields.file.url;
+            products = products.map(item => {
+                const { title, price } = item.fields;
+                const { id } = item.sys;
+                const image = item.fields.image.fields.file.url;
+                return { title, price, id, image };
             });
-            // return data;
+
+            return products;
         } catch (error) {
             console.log(errors);
         }
@@ -35,7 +39,9 @@ class Products {
 
 // display products
 class UI {
-
+    displayProducts(products) {
+    	let result = '';
+    }
 }
 
 // local storage
@@ -48,5 +54,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const products = new Products();
 
     // get all products
-    products.getProducts().then(data => console.log(data));
+    products.getProducts().then(products => ui.displayProducts(products));
 });
