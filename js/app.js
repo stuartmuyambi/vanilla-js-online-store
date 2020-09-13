@@ -58,11 +58,15 @@ class UI {
 				<h3>${product.title}</h3>
 				<h4>$${product.price}</h4>
 			</article>
-			<!-- end of single product -->
     		`;
         });
 
         productsDOM.innerHTML = result;
+    }
+    getBagButtons() {
+    	// this will turn the buttons into arrays
+        const btns = [...document.querySelectorAll('.bag-btn')];
+
     }
 }
 
@@ -81,5 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     products.getProducts().then(products => {
         ui.displayProducts(products)
         Storage.saveProducts(products);
-    });
+    }).then(( => {
+        ui.getBagButtons();
+    }));
 });
