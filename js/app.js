@@ -64,11 +64,20 @@ class UI {
         productsDOM.innerHTML = result;
     }
     getBagButtons() {
-    	// this will turn the buttons into arrays
+        // this will turn the buttons into arrays
         const buttons = [...document.querySelectorAll('.bag-btn')];
-        buttons.forEach(button =>{
-        	let id = button.dataset.id;
-        	console.log(id);
+        buttons.forEach(button => {
+            let id = button.dataset.id;
+            let inCart = cart.find(item => item.id === id);
+            if (inCart) {
+                button.innerText = "In Cart";
+                button.disabled = true;
+            } else {
+            	button.addEventListener('click', (event)=>{
+            		event.target.innerText = "In Cart";
+            		event.target.disabled = true;
+            	});
+            }
         });
     }
 }
@@ -88,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     products.getProducts().then(products => {
         ui.displayProducts(products)
         Storage.saveProducts(products);
-    }).then(()=>{
-    	ui.getBagButtons();
+    }).then(() => {
+        ui.getBagButtons();
     });
 });
