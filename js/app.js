@@ -65,8 +65,11 @@ class UI {
     }
     getBagButtons() {
     	// this will turn the buttons into arrays
-        const btns = [...document.querySelectorAll('.bag-btn')];
-
+        const buttons = [...document.querySelectorAll('.bag-btn')];
+        buttons.forEach(button =>{
+        	let id = button.dataset.id;
+        	console.log(id);
+        });
     }
 }
 
@@ -85,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     products.getProducts().then(products => {
         ui.displayProducts(products)
         Storage.saveProducts(products);
-    }).then(( => {
-        ui.getBagButtons();
-    }));
+    }).then(()=>{
+    	ui.getBagButtons();
+    });
 });
