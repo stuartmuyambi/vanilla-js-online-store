@@ -15,7 +15,16 @@ let cart = [];
 
 // getting the products
 class Products {
+    async getProducts() {
+        try {
+            // adding the path to the products page
+            let result = await fetch('../products.json'); // added semi colon
+            return result;
 
+        } catch (error) {
+            console.log(errors);
+        }
+    }
 }
 
 // display products
