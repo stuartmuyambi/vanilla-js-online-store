@@ -40,7 +40,29 @@ class Products {
 // display products
 class UI {
     displayProducts(products) {
-    	let result = '';
+        let result = '';
+        products.forEach(product => {
+            result += ` 
+    		<!-- single product -->
+			<article class="product">
+				<div class="img-container">
+					<img 
+					src=${product.image} 
+					alt="Product image" 
+					class="product-img">
+					<button class="bag-btn" data-id=${product.id}>
+					<i class="fas fa-shopping-cart"></i> 
+					add to bag
+					</button>
+				</div>
+				<h3>${product.title}</h3>
+				<h4>$${product.price}</h4>
+			</article>
+			<!-- end of single product -->
+    		`;
+        });
+
+        productsDOM.innerHTML = result;
     }
 }
 
